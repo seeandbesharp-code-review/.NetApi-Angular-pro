@@ -58,7 +58,9 @@ namespace ChineseSaleApi.Services
             if (!cachedGifts.IsNull)
             {
                 // אם נמצא ב-cache, נהפוך חלוזרה מרשימת טקסט לרשימת אובייקטים
-                return JsonSerializer.Deserialize<List<GiftDto>>(cachedGifts!)!;
+                var cachedGiftDtos = JsonSerializer.Deserialize<List<GiftDto>>(cachedGifts!);
+                if (cachedGiftDtos != null)
+                    return cachedGiftDtos;
             }
 
             // 2. אם לא נמצא, נלך למסד הנתונים (הקוד המקורי שלך)
